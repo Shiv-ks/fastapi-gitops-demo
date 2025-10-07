@@ -1,1 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-gitops-demo
+  labels:
+    app: fastapi-gitops-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-gitops-demo
+  template:
+    metadata:
+      labels:
+        app: fastapi-gitops-demo
+    spec:
+      containers:
+        - name: fastapi-gitops-demo
+          image: acrgitopsdemo.azurecr.io/fastapi-gitops-demo:latest
+          ports:
+            - containerPort: 8000
 
