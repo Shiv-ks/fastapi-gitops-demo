@@ -34,7 +34,7 @@ jobs:
       - name: Build Docker image locally
         run: |
           IMAGE_TAG=${{ github.run_number }}
-          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG ./app
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG .
 
       - name: Push Docker image to ACR
         run: |
