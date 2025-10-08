@@ -24,17 +24,21 @@ jobs:
         with:
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}  
-          
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
+
       - name: Log in to Azure Container Registry
         run: az acr login --name ${{ secrets.ACR_NAME }}
 
-      - name: Build and push Docker image to ACR
+      - name: Build Docker image locally
         run: |
           IMAGE_TAG=${{ github.run_number }}
-          az acr build \
-            --registry ${{ secrets.ACR_NAME }} \
-            --image ${{ env.IMAGE_NAME }}:$IMAGE_TAG .
+          docker build -t ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG .
+
+      - name: Push Docker image to ACR
+        run: |
+          IMAGE_TAG=${{ github.run_number }}
+          docker push ${{ secrets.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:$IMAGE_TAG
 
       - name: Update Kubernetes manifest with new image tag
         run: |
