@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: fastapi-gitops-demo
-          image: acrgitopsdemo.azurecr.io/fastapi-gitops-demo:20
+          image: acrgitopsdemo.azurecr.io/fastapi-gitops-demo:21
           ports:
             - containerPort: 8000
       imagePullSecrets:
