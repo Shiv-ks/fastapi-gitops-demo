@@ -40,7 +40,7 @@ jobs:
           echo "Building amd64 image: $IMAGE_NAME:$IMAGE_TAG"
           
           docker buildx build \
-            --platform linux/amd64 \
+            --platform linux/amd64,linux/arm64 \
             --no-cache \
             -t $IMAGE_NAME:$IMAGE_TAG \
             -t $IMAGE_NAME:latest \
